@@ -257,10 +257,12 @@ System.out.print("Withdraw amount : ");
 Double withdraw = SCANNER.nextDouble();
 SCANNER.nextLine();
 
-if(!( withdraw>100 || (AccountBlance[index2]-withdraw)>500)){System.out.print("Insufficient Amount"); break;
-}else{AccountBlance[index2]=(AccountBlance[index2]-withdraw);}
 
-System.out.printf("New Account Balance: %.2d",AccountBlance[index2]);
+if(!( withdraw>100 || (Double.valueOf(BankDetails[index2][2])-withdraw)>500)){System.out.print("Insufficient Amount"); break;
+}else{BankDetails[index2][2]=(Double.toString(Double.valueOf(BankDetails[index2][2])-withdraw));}
+
+
+System.out.printf("New Account Balance: %.2d",Double.valueOf(BankDetails[index2][2]));
 
 System.out.printf(SUCCESS_MSG, 
 String.format("%s has been done successfully", "Withdraw"));
@@ -306,8 +308,8 @@ break;
 }
 }
 boolean exists = false;
-for (int i = 0; i < customerId.length; i++) {
-if (customerId[i].equals(id)){
+for (int i = 0; i < BankDetails.length; i++) {
+if (BankDetails[i][0].equals(id)){
 indexFrom = i;
 exists = true;
 break;
@@ -350,8 +352,8 @@ break;
 }
 }
 boolean exists = false;
-for (int i = 0; i < customerId.length; i++) {
-if (customerId[i].equals(id)){
+for (int i = 0; i < BankDetails.length ; i++) {
+if (BankDetails[i][0].equals(id)){
 indexTo = i;
 exists = true;
 break;
@@ -372,18 +374,18 @@ System.out.println();
 }
 }while (!valid);
 
-System.out.println("From Account: "+customerNames[indexFrom]);
-System.out.println("To Account: "+customerNames[indexTo]);
+System.out.println("From Account: "+BankDetails[indexFrom][1]);
+System.out.println("To Account: "+BankDetails[indexTo][1]);
 
-System.out.println("From Acoount balance: "+AccountBlance[indexFrom]);
-System.out.println("To Acoount balance: "+AccountBlance[indexTo]);
+System.out.println("From Acoount balance: "+BankDetails[indexFrom][2]);
+System.out.println("To Acoount balance: "+BankDetails[indexTo][2]);
 
 System.out.print("Enter transfer amount: ");
 Double transfer = SCANNER.nextDouble();
 SCANNER.nextLine();
 
-if(transfer>100 && (AccountBlance[indexFrom]-transfer-(transfer*2/100))>500){
-Double newFrom = AccountBlance[indexFrom]-transfer-(transfer*2/100);
+if(transfer>100 && (Double.valueOf(BankDetails[indexFrom][2])-transfer-(transfer*2/100))>500){
+Double newFrom = Double.valueOf(BankDetails[indexFrom][2])-transfer-(transfer*2/100);
 Double newTo = AccountBlance[indexTo]+transfer;
 AccountBlance[indexFrom] = newFrom;
 AccountBlance[indexTo] = newTo;
