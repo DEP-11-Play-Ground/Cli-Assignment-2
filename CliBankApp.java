@@ -386,9 +386,10 @@ SCANNER.nextLine();
 
 if(transfer>100 && (Double.valueOf(BankDetails[indexFrom][2])-transfer-(transfer*2/100))>500){
 Double newFrom = Double.valueOf(BankDetails[indexFrom][2])-transfer-(transfer*2/100);
-Double newTo = AccountBlance[indexTo]+transfer;
-AccountBlance[indexFrom] = newFrom;
-AccountBlance[indexTo] = newTo;
+Double newTo = Double.valueOf(BankDetails[indexTo][2])+transfer;
+
+BankDetails[indexFrom][2]= Double.toString(newFrom);
+BankDetails[indexTo][2] = Double.toString(newTo);
 System.out.println("New Account Balance From: "+newFrom);
 System.out.println("New Account Balance From: "+newTo);
 
@@ -442,8 +443,8 @@ break;
 }
 
 boolean exists = false;
-for (int i = 0; i < customerId.length; i++) {
-if (customerId[i].equals(id)){
+for (int i = 0; i < BankDetails.length; i++) {
+if (BankDetails[i][0].equals(id)){
 index = i;
 exists = true;
 break;
@@ -491,8 +492,8 @@ break;
 }
 }
 boolean exists = false;
-for (int i = 0; i < customerId.length; i++) {
-if (customerId[i].equals(id)){
+for (int i = 0; i < BankDetails.length; i++) {
+if (BankDetails[i][0].equals(id)){
 index3 = i;
 exists = true;
 break;
@@ -517,23 +518,22 @@ System.out.println();
 System.out.print("\tAre you sure to delete this account (Y/n)? ");
 if (!SCANNER.nextLine().strip().toUpperCase().equals("Y")) break;
 
-newIdtemp = new String[customerId.length - 1];
-newNametemp= new String[newIdtemp.length];
+newBankDetails = new String[BankDetails.length - 1][3];
+newBankDetails = new String[BankDetails.length-1][3];
 
-for (int i = 0; i < customerId.length; i++) {
+for (int i = 0; i < BankDetails.length; i++) {
 if (i < index3){
-newIdtemp[i] = customerId[i];
-newNametemp[i] = customerNames[i];
+newBankDetails[i] = BankDetails[i];
+
 }else if (i == index3){
 continue;
 }else{
-newIdtemp[i - 1] = customerId[i];
-newNametemp[i - 1] = customerNames[i];
+newBankDetails[i - 1] = BankDetails[i];
+newBankDetails[i - 1] = BankDetails[i];
 }
 }
 
-customerId = newIdtemp;
-customerNames = newNametemp;
+BankDetails = newBankDetails;
 
 
 System.out.println();
@@ -546,14 +546,7 @@ break;
 }
 }while(true);
 
-
-
-
-
-
-
-
         
-    }
+     }
    
-    }
+}
