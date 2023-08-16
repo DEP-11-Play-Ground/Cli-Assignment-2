@@ -120,12 +120,15 @@ case CREATE_ACCOUNT:
           newBankDetails[newBankDetails.length - 1][1] = name;
           newBankDetails[newBankDetails.length - 1][2] = Double.toString(initialDeposit);
 
-         newBankDetails = BankDetails;
+         BankDetails = newBankDetails;
 
 
-System.out.println(Arrays.toString(BankDetails));
-System.out.println(Arrays.toString(BankDetails));
-System.out.println(Arrays.toString(BankDetails));
+// System.out.println(Arrays.toString(BankDetails));
+// System.out.println(Arrays.toString(BankDetails));
+// System.out.println(Arrays.toString(BankDetails));
+// System.out.println(BankDetails[0][0]);
+// System.out.println(BankDetails[0][1]);
+// System.out.println(BankDetails[0][2]);
 
 System.out.println();
 System.out.printf(SUCCESS_MSG, 
@@ -286,40 +289,40 @@ break;
 
 case TRANSFER:
 
-int indexFrom = 0;
+              int indexFrom = 0;
 // ID Validation
-do {
-valid = true;
-System.out.print("\tEnter the Customer ID to delete: ");
-id = SCANNER.nextLine().toUpperCase().strip();
-if (id.isBlank()){
-System.out.printf(ERROR_MSG, "ID can't be empty");
-valid = false;
-}else if (!id.startsWith("C-") || id.length() < 3){
-System.out.printf(ERROR_MSG, "Invalid ID format");
-valid = false;
-}else{
-String number = id.substring(2);
-for (int i = 0; i < number.length(); i++) {
-if (!Character.isDigit(number.charAt(i))){
-System.out.printf(ERROR_MSG, "Invalid ID format");
-valid = false;
-break;
-}
-}
-boolean exists = false;
-for (int i = 0; i < BankDetails.length; i++) {
+              do {
+                  valid = true;
+                  System.out.print("\tEnter the Customer ID to delete: ");
+                  id = SCANNER.nextLine().toUpperCase().strip();
+                  if (id.isBlank()){
+                  System.out.printf(ERROR_MSG, "ID can't be empty");
+                  valid = false;
+                }else if (!id.startsWith("C-") || id.length() < 3){
+                 System.out.printf(ERROR_MSG, "Invalid ID format");
+                 valid = false;
+                }else{
+                  String number = id.substring(2);
+                  for (int i = 0; i < number.length(); i++) {
+                  if (!Character.isDigit(number.charAt(i))){
+                  System.out.printf(ERROR_MSG, "Invalid ID format");
+                  valid = false;
+                  break;
+                }
+          }
+                  boolean exists = false;
+                   for (int i = 0; i < BankDetails.length; i++) {
 if (BankDetails[i][0].equals(id)){
 indexFrom = i;
 exists = true;
 break;
 }
 } 
-if (!exists){
-valid = false;
-System.out.printf(ERROR_MSG, "Customer ID does not exist");
-}
-}
+                   if (!exists){
+                  valid = false;
+                  System.out.printf(ERROR_MSG, "Customer ID does not exist");
+               }
+          }
 if (!valid) {
 System.out.print("\n\tDo you want to try again? (Y/n)");
 if (!SCANNER.nextLine().strip().toUpperCase().equals("Y")){
